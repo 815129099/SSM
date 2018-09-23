@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace指定接口-->
+<mapper namespace="com.smart.dao.StudentDao">
+
+    <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="Student" id="resultStudent">
+        <id column="id" property="id" />
+        <result column="email" property="email" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="height" property="height" />
+        <result column="age" property="age" />
+        <result column="weight" property="weight" />
+        <result column="phone" property="phone" />
+        <result column="school" property="school" />
+        <result column="rank" property="rank" />
+        <result column="beginYear" property="beginYear" />
+        <result column="endYear" property="endYear" />
+        <result column="freeTime" property="freeTime" />
+        <result column="exJob" property="exJob" />
+        <result column="exSite" property="exSite" />
+        <result column="introduce" property="introduce" />
+    </resultMap>
+
+    <update id="comBasicInfo" parameterType="Student">
+        UPDATE
+            stuinfo
+        SET
+            name = #{name},
+            sex = #{sex},
+            height = #{height},
+            weight = #{weight},
+            phone = #{phone},
+            age = #{age},
+            upTime = #{upTime}
+        WHERE
+            email = #{email}
+    </update>
+
+    <!--通过邮箱获取student-->
+    <select id="getStuByEmail" parameterType="String" resultMap="resultStudent">
+        SELECT *
+        FROM stuinfo
+        WHERE email = #{email}
+    </select>
+
+    <!--填写教育信息-->
+    <update id="comEduInfo" parameterType="Student">
+        UPDATE
+            stuinfo
+        SET
+            school = #{school},
+            rank = #{rank},
+            beginYear = #{beginYear},
+            endYear = #{endYear},
+            upTime = #{upTime}
+        WHERE
+            email = #{email}
+    </update>
+
+    <!--自我描述-->
+    <update id="comDescribe" parameterType="Student">
+        UPDATE
+            stuinfo
+        SET
+        introduce = #{introduce},
+        upTime = #{upTime}
+        WHERE
+            email = #{email}
+    </update>
+
+    <update id="comExpect" parameterType="Student">
+        UPDATE
+            stuinfo
+        SET
+            exJob = #{exJob},
+            exSite = #{exSite},
+            freeTime = #{freeTime},
+            upTime = #{upTime}
+        WHERE
+            email = #{email}
+    </update>
+
+    <select id="getResumeById" parameterType="int" resultType="Resume">
+        SELECT *
+        FROM resume
+        WHERE ID = #{id}
+    </select>
+
+    <!--报名-->
+    <insert id="stuApply" parameterType="java.util.Map">
+        INSERT INTO apply(stuEmail,comEmail,jobName,applyState,applyId,applyTime,stuState)
+        VALUES(#{stuEmail},#{comEmail},#{jobName},"0",#{applyId},#{applyTime},"0")
+    </insert>
+
+    <!--通过email获取id-->
+    <select id="getRecordByEmail" parameterType="String" resultType="String">
+        SELECT applyId
+        FROM apply
+        WHERE stuEmail = #{email}
+    </select>
+
+    <!--显示报名记录-->
+    <select id="showRecord" parameterType="String" resultType="java.util.Map">
+        select apply.*,resume.*,stuinfo.name
+        from apply,resume,stuinfo
+        where
+            apply.stuEmail = #{email}
+            and resume.id = apply.applyId
+            and apply.comEmail = resume.email
+            and stuinfo.email= apply.stuEmail
+            and apply.stuState !="3"
+    </select>
+
+    <!--评价公司-->
+    <update id="appCom" parameterType="Record">
+        update apply
+        set
+        comGrade = #{comGrade},
+        comText = #{comText}
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <update id="stuDel" parameterType="int">
+        update apply
+        set stuState = "3"
+        where id = #{id}
+    </update>
+
+    <!--学生申述-->
+    <insert id="makeAllege" parameterType="Allege">
+        insert into allege(allId,email,allEmail,allReason,allText,allState,allTime)
+        values(#{allId},#{email},#{allEmail},#{allReason},#{allText},"未处理",#{allTime})
+    </insert>
+
+    <!--显示申述记录-->
+    <select id="showAllege" parameterType="String" resultType="Allege">
+        select *
+        from allege
+        where email= #{email}
+    </select>
+
+</mapper>

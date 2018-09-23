@@ -1,0 +1,138 @@
+
+#box FORM {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box UL {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box OL {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box H1 {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box H2 {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box H3 {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box H4 {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box H5 {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box H6 {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box P {
+	padding-right:0px;padding-left:0px;padding-bottom:0px;margin:0px;padding-top:0px
+}
+#box INPUT {
+	font-size:12px
+}
+#box textAREA {
+	font-size:12px
+}
+#box SELECT {
+	font-size:12px
+}
+#box BUTTON {
+	font-size:12px
+}
+#box IMG {
+	border-top-style:none;border-right-style:none;border-left-style:none;border-bottom-style:none
+}
+#box a{
+	color:#999;text-decoration:underline
+}
+
+#box {
+	border-right:#666 5px solid;border-top:#666 5px solid;margin:0px auto;border-left:#666 5px solid;width:500px;border-bottom:#666 5px solid
+}
+#box H4 {
+	padding-right:10px;padding-left:10px;font-size:14px;padding-bottom:0px;color:#fff;padding-top:8px;height:22px
+}
+#box .cont {
+	padding-right:20px;padding-left:20px;padding-bottom:20px;padding-top:20px
+}
+#box ADDRESS {
+	display:block;margin:20px auto 0px;width:400px
+}
+#box #myPoint {
+	padding-right:0px;padding-left:0px;padding-bottom:15px;overflow:hidden;padding-top:0px;border-bottom:#ddd 1px solid;height:70px;
+
+}
+#box #myPoint SPAN {
+	float:left;line-height:64px;font-family:Tahoma
+}
+#box #myPoint SPAN BIG {
+	font-weight:bold;font-size:60px
+}
+#box #myPoint SPAN SMALL {
+	font-size:30px
+}
+#box #myPoint DIV {
+	font-size:14px;float:left;margin:10px 0px 0px 10px;height:40px
+}
+#box #myPoint DIV IMG {
+	vertical-align:middle;margin-right:5px
+}
+#box #doPoint P {
+	padding-right:0px;padding-left:0px;padding-bottom:10px;padding-top:10px
+}
+#box #doPoint TR TD {
+	padding-right:5px;padding-left:5px;padding-bottom:3px;padding-top:3px
+}
+#box #doPoint TR TD IMG {
+	margin-top:5px
+}
+#box #doPoint TR TD STRONG {
+	font-size:14px;color:#f00
+}
+#box #doPoint SPAN {
+	display:block;background:url(style/js/statics/star_small.gif) no-repeat 2px 0px;width:120px;height:20px
+}
+#box #doPoint SPAN SMALL {
+	font-size:0px;float:left;overflow:hidden;width:12px;cursor:pointer;padding-top:20px;height:0px
+}
+#box #doPoint .star10 {
+	background:url(star_small.gif) no-repeat 2px 0px
+}
+#box #doPoint .star9 {
+	background:url(star_small.gif) no-repeat 2px -20px
+}
+#box #doPoint .star8 {
+	background:url(star_small.gif) no-repeat 2px -40px
+}
+#box #doPoint .star7 {
+	background:url(star_small.gif) no-repeat 2px -60px
+}
+#box #doPoint .star6 {
+	background:url(star_small.gif) no-repeat 2px -80px
+}
+#box #doPoint .star5 {
+	background:url(star_small.gif) no-repeat 2px -100px
+}
+#box #doPoint .star4 {
+	background:url(star_small.gif) no-repeat 2px -120px
+}
+#box #doPoint .star3 {
+	background:url(star_small.gif) no-repeat 2px -140px
+}
+#box #doPoint .star2 {
+	background:url(star_small.gif) no-repeat 2px -160px
+}
+#box #doPoint .star1 {
+	background:url(star_small.gif) no-repeat 2px -180px
+}
+#box FORM {
+	margin:15px 0px 0px
+}
+#box FORM LABEL {
+	display:block;margin:20px 0px 5px 0px;
+}
+#box FORM textAREA {
+	width:440px;height:160px;
+}

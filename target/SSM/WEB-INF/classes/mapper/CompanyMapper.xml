@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace指定接口-->
+<mapper namespace="com.smart.dao.CompanyDao">
+
+    <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="Company" id="resultCompany">
+        <id column="id" property="id" />
+        <result column="email" property="email" />
+        <result column="name" property="name" />
+        <result column="website" property="website" />
+        <result column="city" property="city" />
+        <result column="select_industry_hidden" property="select_industry_hidden" />
+        <result column="select_scale_hidden" property="select_scale_hidden" />
+        <result column="temptation" property="temptation" />
+        <result column="principal" property="principal" />
+        <result column="phone" property="phone" />
+    </resultMap>
+
+    <resultMap type="Resume" id="resultResume">
+        <id column="id" property="id" />
+        <result column="jobType" property="jobType" />
+        <result column="jobName" property="jobName" />
+        <result column="department" property="department" />
+        <result column="number" property="number" />
+        <result column="deRequest" property="deRequest" />
+        <result column="salary" property="salary" />
+        <result column="detail" property="detail" />
+        <result column="time" property="time" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 注册 -->
+    <insert id="CompleteCom" parameterType="Company">
+        insert into company (email,name,website,city,select_industry_hidden,select_scale_hidden,temptation,principal,phone)
+        values(#{email},#{name},#{website},#{city},#{select_industry_hidden},#{select_scale_hidden},#{temptation},#{principal},#{phone})
+    </insert>
+
+    <!-- 编辑公司介绍 -->
+    <update id="UpdateTem" parameterType="Company">
+        UPDATE company
+        SET
+        temptation=#{temptation}
+
+        WHERE email=#{email}
+    </update>
+
+    <!-- 编辑公司负责人 -->
+    <update id="UpdateMe" parameterType="Company">
+        UPDATE company
+        SET
+        principal = #{principal},
+        phone = #{phone}
+        WHERE
+        email =#{email}
+    </update>
+
+    <!-- 编辑公司基本信息 -->
+    <update id="UpdateUrl" parameterType="Company">
+        UPDATE company
+        SET
+        city = #{city},
+        website = #{website},
+        select_industry_hidden = #{select_industry_hidden},
+        select_scale_hidden = #{select_scale_hidden}
+        WHERE
+        email =#{email}
+    </update>
+
+    <!-- 编辑公司名称 -->
+    <update id="UpdateName" parameterType="Company">
+        UPDATE company
+        SET
+        name = #{name}
+        WHERE
+        email =#{email}
+    </update>
+
+    <!-- 公司名称列表 -->
+    <select id="isName" parameterType="String" resultMap="resultCompany">
+        select *
+        from company
+        WHERE
+        name =#{name}
+    </select>
+
+    <!-- 获取兼职列表 -->
+    <select id="isJobName" parameterType="String" resultMap="resultResume">
+        select *
+        from resume
+        WHERE
+        jobName =#{jobName}
+    </select>
+
+    <!-- 通过邮箱获取兼职列表 -->
+    <select id="getResume" parameterType="String" resultMap="resultResume">
+        select *
+        from resume
+        WHERE
+        email =#{email}
+    </select>
+
+
+    <!--通过邮箱获取信息-->
+    <select id="getComByEm" parameterType="String" resultMap="resultCompany">
+        select *
+        from company
+        where email = #{email}
+    </select>
+
+
+    <!--通过邮箱获取兼职信息-->
+    <select id="disResume" parameterType="String" resultMap="resultResume">
+        select *
+        from resume
+        where email = #{email}
+    </select>
+    <!--通过邮箱获取兼职信息-->
+    <select id="diResume"  resultMap="resultResume">
+        select *
+        from resume
+    </select>
+
+    <select id="getResumeById" parameterType="int" resultMap="resultResume">
+        select *
+        from resume
+        where
+            id = #{id}
+    </select>
+
+    <select id="isJob" parameterType="Resume" resultMap="resultResume">
+        select *
+        from resume
+        where email = #{email}
+              and jobName = #{jobName}
+    </select>
+
+    <insert id="comJob" parameterType="Resume">
+        INSERT into resume (email,jobType,jobName,department,number,deRequest,detail,salary,time,state)
+        VALUES(#{email},#{jobType},#{jobName},#{department},#{number},#{deRequest},#{detail},#{salary},#{time},"有效")
+    </insert>
+
+    <update id="editJob" parameterType="Resume">
+        UPDATE resume
+        SET
+            department = #{department},
+            number = #{number},
+            deRequest = #{deRequest},
+            detail = #{detail},
+            salary = #{salary},
+            time = #{time}
+        WHERE
+            email = #{email}
+        and jobName = #{jobName}
+    </update>
+
+    <update id="downResume" parameterType="int">
+        UPDATE resume
+        SET
+            state = "下线"
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="upResume" parameterType="int">
+        UPDATE resume
+        SET
+        state = "有效"
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delResume" parameterType="int">
+        DELETE from resume
+        WHERE id = #{id}
+    </delete>
+
+    <!--获取用户密码-->
+    <select id="getPassword" parameterType="String" resultType="String">
+        SELECT
+            password
+        FROM
+            user
+        WHERE
+            email = #{email}
+    </select>
+
+    <!--修改密码-->
+    <update id="editPwd" parameterType="User">
+        UPDATE
+            user
+        SET
+            password = #{password}
+        WHERE
+            email = #{email}
+    </update>
+
+    <!--获取所有有效兼职-->
+    <select id="allResume" resultMap="resultResume">
+        SELECT *
+        FROM
+            resume
+        WHERE
+            state = "有效"
+    </select>
+
+    <!--通过名称获取兼职-->
+    <select id="findResume" parameterType="String" resultMap="resultResume">
+        SELECT *
+        FROM
+        resume
+        WHERE
+        jobName LIKE concat('%',#{jobName},'%')
+    </select>
+
+    <!--显示报名-->
+    <select id="showAp" parameterType="String" resultType="java.util.Map">
+        select apply.*,stuinfo.*
+        from apply,stuinfo
+        where apply.comEmail = #{email}
+        and apply.stuEmail = stuinfo.email
+    </select>
+
+    <!--通过-->
+    <update id="passApply" parameterType="int">
+        update apply
+        set applyState = "1",stuState = "1"
+        where id = #{id}
+    </update>
+
+    <!--不通过-->
+    <update id="unPassApply" parameterType="int">
+        update apply
+        set applyState = "2",stuState = "2"
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <update id="delApply" parameterType="int">
+        update apply
+        set applyState = "3"
+        where id = #{id}
+    </update>
+
+    <!--完成-->
+    <update id="comApply" parameterType="int">
+        update apply
+        set applyState = "4",stuState = "4"
+        where id = #{id}
+    </update>
+
+    <select id="getStudent" parameterType="int" resultType="Student">
+        SELECT stuinfo.*
+        from apply,stuinfo
+        where apply.applyId = #{id} and
+              apply.stuEmail = stuinfo.email
+    </select>
+
+    <!--评价学生-->
+    <update id="appStu" parameterType="Record">
+        update apply
+        set
+            stuGrade = #{stuGrade},
+            stuText = #{stuText}
+        where id = #{id}
+    </update>
+
+    <!--公司申述-->
+    <insert id="makeAllege" parameterType="Allege">
+        insert into allege(allId,email,allEmail,allReason,allText,allState,allTime)
+        values(#{allId},#{email},#{allEmail},#{allReason},#{allText},"未处理",#{allTime})
+    </insert>
+
+    <!--显示申述记录-->
+    <select id="showAllege" parameterType="String" resultType="Allege">
+        select *
+        from allege
+        where email= #{email}
+    </select>
+
+
+</mapper>

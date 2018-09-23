@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace指定接口-->
+<mapper namespace="com.smart.dao.UserDao">
+
+    <!-- 为了返回list 类型而定义的returnMap -->
+    <resultMap type="User" id="resultUser">
+        <id column="id" property="id" />
+        <result column="email" property="email" />
+        <result column="password" property="password" />
+        <result column="type" property="type" />
+        <result column="state" property="state" />
+    </resultMap>
+
+
+    <resultMap type="Company" id="resultCompany">
+        <id column="id" property="id" />
+        <result column="email" property="email" />
+        <result column="name" property="name" />
+        <result column="website" property="website" />
+        <result column="city" property="city" />
+        <result column="select_industry_hidden" property="select_industry_hidden" />
+        <result column="select_scale_hidden" property="select_scale_hidden" />
+        <result column="temptation" property="temptation" />
+        <result column="principal" property="principal" />
+        <result column="phone" property="phone" />
+    </resultMap>
+
+    <!-- 注册 -->
+    <insert id="Register" parameterType="User">
+        insert into user(email,password,type,state)
+        values(#{email},#{password},#{type},"审核")
+    </insert>
+
+    <!-- 添加企业 -->
+    <insert id="addCompany" parameterType="String">
+        insert into company(email)
+        values(#{email})
+    </insert>
+
+    <insert id="addStudent" parameterType="String">
+        INSERT INTO stuinfo(email)
+        VALUES(#{email})
+    </insert>
+
+    <select id="getEmail" parameterType="String" resultMap="resultUser">
+        select *
+        from user
+        where email = #{email} and state != "删除"
+    </select>
+
+    <select id="getComByEmail" parameterType="String" resultMap="resultCompany">
+        select *
+        from company
+        where email = #{email}
+    </select>
+
+    <select id="getStuByEmail" parameterType="String" resultType="Student">
+        select *
+        from stuinfo
+        where email = #{email}
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="User">
+        select *
+        from User
+        where id = #{id}
+    </select>
+
+
+
+
+    <select id="listStu" resultType="User">
+        select *
+        from User
+    </select>
+
+    <!-- 用户列表 -->
+    <select id="listUser" parameterType="User" resultType="User">
+        SELECT *
+        FROM User u
+        <where>
+            <if test="email!=null and email!=''">
+                u.email LIKE #{email}
+            </if>
+            <if test="type!=null and type!=''">
+                AND u.type=#{type}
+            </if>
+            and u.state != "删除"
+        </where>
+    </select>
+
+    <!--删除-->
+    <update id="delUser" parameterType="int">
+        update User
+        set state = "删除"
+        where id = #{id}
+    </update>
+
+    <!--锁定-->
+    <update id="lockUser" parameterType="int">
+        update User
+        set state = "锁定"
+        where id = #{id}
+    </update>
+
+    <!--解锁-->
+    <update id="clearUser" parameterType="int">
+        update User
+        set state = "有效"
+        where id = #{id}
+    </update>
+
+    <!-- 修改密码 -->
+    <update id="updatePassword" parameterType="User">
+        UPDATE User
+        SET password=#{password}
+        WHERE id=#{id}
+    </update>
+
+    <!-- 用户列表 -->
+    <select id="listAllege" parameterType="Allege" resultType="Allege">
+        SELECT *
+        FROM Allege a
+        <where>
+            <if test="email!=null and email!=''">
+                a.email LIKE #{email}
+            </if>
+            <if test="allState!=null and allState!=''">
+                AND a.allState=#{allState}
+            </if>
+            and a.allState != "删除"
+        </where>
+    </select>
+
+    <!--获取申述-->
+    <select id="getAllegeById" parameterType="int" resultType="Allege">
+        select *
+        from allege
+        where id = #{id}
+    </select>
+
+    <!--处理申述-->
+    <update id="dealAllege" parameterType="Allege">
+        update allege
+        set dealText = #{dealText},
+            allState = "已处理",
+            dealTime = #{dealTime}
+        where id = #{id}
+    </update>
+
+    <!--删除申述-->
+    <update id="delAllege" parameterType="int">
+        update allege
+        set allState = "删除"
+        where id = #{id}
+    </update>
+
+    <!--重置密码-->
+    <update id="resetPassword" parameterType="User">
+        update user
+        set password = #{password}
+        where email = #{email}
+    </update>
+
+</mapper>

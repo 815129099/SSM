@@ -1,0 +1,13 @@
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:14:00 +0800] "GET /SSM/login HTTP/1.1" 200 4532 http-bio-8080-exec-1 1621
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:14:04 +0800] "GET /SSM/h/images/favicon.ico HTTP/1.1" 404 949 http-bio-8080-exec-5 18
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:14:09 +0800] "GET /SSM/index HTTP/1.1" 500 3693 http-bio-8080-exec-6 1907
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:14:10 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-7 0
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:17:53 +0800] "GET /SSM/index HTTP/1.1" 500 3693 http-bio-8080-exec-2 162
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:16 +0800] "GET /SSM/index HTTP/1.1" 200 20161 http-bio-8080-exec-8 278
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:17 +0800] "GET /SSM/style/images/logo5.png HTTP/1.1" 304 - http-bio-8080-exec-1 59
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:24 +0800] "POST /SSM/allResume HTTP/1.1" 200 1945 http-bio-8080-exec-1 5798
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:39 +0800] "GET /SSM/index HTTP/1.1" 200 20149 http-bio-8080-exec-5 173
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:39 +0800] "POST /SSM/allResume HTTP/1.1" 200 1945 http-bio-8080-exec-5 47
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:46 +0800] "GET /SSM/index HTTP/1.1" 500 3929 http-bio-8080-exec-3 151
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:54 +0800] "GET /SSM/index HTTP/1.1" 200 20149 http-bio-8080-exec-7 173
+0:0:0:0:0:0:0:1 - - [13/Apr/2018:15:18:54 +0800] "POST /SSM/allResume HTTP/1.1" 200 1945 http-bio-8080-exec-7 40

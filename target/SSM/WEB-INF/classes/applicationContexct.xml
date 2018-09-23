@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+    <bean id="mailsender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="mail.com"></property>
+        <property name="port" value="25"></property>
+        <property name="username"  value="jerry"></property>
+        <property name="password"  value="123" ></property>
+        <property name="protocol"  value="smtp"></property>
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!-- 简单邮件 -->
+    <bean id="attMailsendService" class=".com.smart.email.AttMailsendServiceImpl">
+        <property name="sender" ref="mailsender"></property>
+    </bean>
+
+</beans>
